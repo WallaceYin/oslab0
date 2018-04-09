@@ -146,7 +146,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			p++;
 		} //Width
 
-		for (int i = 0; i < 64; i++)
+		for (int i = 0; i < (width & 0x3f); i++)
 			if (flags & BLANK)
 				buf_temp[i] = ' ';
 
