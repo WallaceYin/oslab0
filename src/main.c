@@ -1,6 +1,7 @@
 #include <am.h>
 #include <amdev.h>
 #include <ylib.h>
+#define TEST
 
 static void input_test(_Device *dev);
 static void timer_test(_Device *dev);
@@ -10,6 +11,7 @@ static void ata_test(_Device *dev);
 
 int main() {
   if (_ioe_init() != 0) _halt(1);
+#ifdef TEST
   printf("_heap = [%08x, %08x)\n", _heap.start, _heap.end);
   for (int n = 1; ; n++) {
     _Device *dev = _device(n);
@@ -24,6 +26,24 @@ int main() {
     }
     printf("\n");
   }
+#else
+	//TODO: enjoy a game!!!
+	unsigned next_frame = 0;
+	int key;
+	game_init();
+	for (;;)
+	{
+		while(up_time() < next_frame);
+		while ((key = readkey()) != _KEY_NONE)
+		{
+			kbd_event(key);
+		}
+		game_process();
+		screen_update();
+		next_frame += 1000 / FPS;
+	}
+
+#endif
   return 0;
 }
 
