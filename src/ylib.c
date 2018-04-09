@@ -246,16 +246,16 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 					num_temp /= 16;
 					snum_len++;
 				}
-				if (width > snum_len)
+				if (width >= snum_len)
 				{
 					if (flags & LEFT)
 					{
 						for (int i = snum_len - 1; i >= 0; i--)
 						{
-							if (snum[snum_len] > 9)
-								add_char((char)(snum[snum_len] - 10 + 'a'));
+							if (snum[i] > 9)
+								add_char((char)(snum[i] - 10 + 'a'));
 							else
-								add_char((char)(snum[snum_len] + '0'));
+								add_char((char)(snum[i] + '0'));
 						}
 						for (int i = snum_len; i < width; i++)
 							add_char(' ');
@@ -266,10 +266,10 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 							add_char('0');
 						for (int i = snum_len - 1; i >= 0; i--)
 						{
-							if (snum[snum_len] > 9)
-								add_char((char)(snum[snum_len] - 10 + 'a'));
+							if (snum[i] > 9)
+								add_char((char)(snum[i] - 10 + 'a'));
 							else
-								add_char((char)(snum[snum_len] + '0'));
+								add_char((char)(snum[i] + '0'));
 						}
 					}
 				}
@@ -277,9 +277,9 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 					for (int i = snum_len - 1; i >= 0; i--)
 					{
 						if (snum[i] > 9)
-							add_char((char)(snum[snum_len] - 10 + 'a'));
+							add_char((char)(snum[i] - 10 + 'a'));
 						else
-							add_char((char)(snum[snum_len] + '0'));
+							add_char((char)(snum[i] + '0'));
 					}
 				break;
 
