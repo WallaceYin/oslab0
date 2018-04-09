@@ -101,7 +101,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	};
 	//------------------------------------------------------------------
 
-	memset(buf_temp, 0, 128);
+	memset(buf_temp, 0, 64);
 
 	char *p;
 	for (p = (char *)fmt;;)
