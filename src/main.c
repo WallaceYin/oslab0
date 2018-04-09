@@ -1,13 +1,13 @@
 #include <am.h>
 #include <amdev.h>
-#include <ylib.h>
+//#include <ylib.h>
 // TODO: implement necessary libraries
-/*int printf(const char *fmt, ...) {
+int printf(const char *fmt, ...) {
   for (; *fmt; fmt++) {
     _putc(*fmt);
   }
   return 0;
-}*/
+}
 
 static void input_test(_Device *dev);
 static void timer_test(_Device *dev);
