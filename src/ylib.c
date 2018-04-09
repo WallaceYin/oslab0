@@ -77,7 +77,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	int width;
 	int ret = 0;
 
-	int type = NON_TYPE;
+	//int type = NON_TYPE;
 	//char buf_temp[64];
 	char ch_temp;
 	int num_temp;
@@ -146,10 +146,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			p++;
 		} //Width
 
-		for (int i = 0; i < (width & 0x3f); i++)
-			if (flags & BLANK)
-				buf_temp[i] = ' ';
-
 		//Precision is not supported yet.
 		//Length is not supported yet.
 		
@@ -160,8 +156,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		{
 			case 'c':
 				ch_temp = (char)va_arg(ap, int);
-				type = CHAR;
-				if (width == 0) buf_temp[width] = ch_temp;
+				if (width == 0) buf_temp[0] = ch_temp;
 				else if (flags | LEFT) buf_temp[0] = ch_temp;
 				else 
 				{
@@ -175,7 +170,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			case 'u':
 			case 'd': // negative numbers are not supported yet
 				num_temp = va_arg(ap, int);
-				type = DEX;
 				while (num_temp > 0)
 				{
 					snum[snum_len] = num_temp % 10;
@@ -237,7 +231,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			case 'X':
 			case 'x':
 				num_temp = va_arg(ap, unsigned);
-				type = HEX;
 				while (num_temp > 0)
 				{
 					snum[snum_len] = num_temp % 16;
