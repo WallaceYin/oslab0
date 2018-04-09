@@ -79,7 +79,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 
 	//char buf_temp[64];
 	char ch_temp;
-	int num_temp;
+	unsigned num_temp;
 	char *str_temp = NULL;
 
 	//-----------------------------------------------------------------
