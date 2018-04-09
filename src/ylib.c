@@ -169,6 +169,11 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			case 'u':
 			case 'd': // negative numbers are not supported yet
 				num_temp = va_arg(ap, unsigned);
+				if (num_temp == 0)
+				{
+					snum[snum_len] = 0;
+					snum_len ++;
+				}
 				while (num_temp > 0)
 				{
 					snum[snum_len] = num_temp % 10;
