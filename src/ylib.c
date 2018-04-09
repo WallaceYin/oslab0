@@ -70,6 +70,7 @@ int printf(const char *fmt, ...)
 enum {NONE = 0x00, LEFT = 0x01, SIGN = 0x02, BLANK = 0x04, PREFIX = 0x08, ZERO = 0x10}; //Flags
 enum {NON_TYPE = 0, CHAR = 1, DEX, DOUBLE, POINT, STRING, HEX, UNSIGNED}; //Types
 
+static char buf_temp[64];
 int vsprintf(char *buf, const char *fmt, va_list ap)
 {
 	int flags;
@@ -77,7 +78,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	int ret = 0;
 
 	int type = NON_TYPE;
-	char buf_temp[64];
+	//char buf_temp[64];
 	char ch_temp;
 	int num_temp;
 	char *str_temp = NULL;
@@ -117,6 +118,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			add_char(*p);
 			continue;
 		}
+
 		ret ++;
 		p++; //Skip '%'
 
