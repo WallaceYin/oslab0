@@ -110,7 +110,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		//precision = -1;
 		width = 0;
 		flags = 0;
-		type = NON_TYPE;
 		if (*p == '\0')
 			break;
 		if (*p != '%')
