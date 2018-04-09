@@ -44,6 +44,15 @@ int strcmp(const char *str_1, const char *str_2)
 	return 0;
 }
 
+char *strcat(char *dest, const char *src)
+{
+	char *p;
+	p = dest;
+	while (*p)	p++;
+	strcpy(p, src);
+	return dest;
+}
+
 static char str_out[1024];
 int printf(const char *fmt, ...)
 {
@@ -80,7 +89,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		buf[buf_len] = ch;
 		buf_len++;
 	};
-	void add_string(char *str)
+	void add_buf(char *str)
 	{
 		strcat(buf, str);
 	};
@@ -95,7 +104,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	memset(buf_temp, 0, 128);
 
 	char *p;
-	for (p = fmt;;)
+	for (p = (char *)fmt;;)
 	{
 		precision = -1;
 		width = 0;
