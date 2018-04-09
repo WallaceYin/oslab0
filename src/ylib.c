@@ -76,7 +76,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	int width;
 	//int precision;//Float is not supported yet, so this would not be used.
 	//int length = 0;
-	int type;
+	int type = NON_TYPE;
 	char buf_temp[64];
 	char ch_temp;
 	int num_temp;
@@ -105,7 +105,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	char *p;
 	for (p = (char *)fmt;;)
 	{
-		precision = -1;
+		//precision = -1;
 		width = 0;
 		flags = 0;
 		type = NON_TYPE;
@@ -216,7 +216,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				break;
 
 			case 's':
-				buf_temp = va_arg(ap, char *);
+				buf_temp = (char *)va_arg(ap, int);
 				if (strlen(buf_temp) >= width)
 					add_buf(buf_temp);
 				else if (flags & LEFT)
@@ -249,7 +249,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 					{
 						for (int i = snum_len - 1; i >= 0; i--)
 						{
-							if (snum[len] > 9)
+							if (snum[snum_len] > 9)
 								add_char((char)(snum[len] - 10 + 'a'));
 							else
 								add_char((char)(snum[len] + '0'));
