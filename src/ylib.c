@@ -2,12 +2,13 @@
 #include <amdev.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <ylib.h>
 
 void *memset(void *arr, int val, size_t n)
 {
-	for (int = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 		arr[i] = 0;
 	return arr;
 }
@@ -15,7 +16,7 @@ void *memset(void *arr, int val, size_t n)
 void *memcpy(void *dest, const void *src, size_t n)
 {
 	for (int i = 0; i < n; i++)
-		dest[i] = src[i];
+		((char *)dest)[i] = ((char *)src)[i];
 	return dest;
 }
 
@@ -58,7 +59,7 @@ int printf(const char *fmt, ...)
 	int n = vsprintf(outp, ap, fmt);
 	va_end(ap);
 	for (int i = 0; i < n; i++)
-		_putc(outp);
+		_putc(outp[i]);
 	free(outp);
 	return n;
 }
