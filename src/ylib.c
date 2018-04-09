@@ -252,7 +252,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 							if (snum[snum_len] > 9)
 								add_char((char)(snum[snum_len] - 10 + 'a'));
 							else
-								add_char((char)(snum[len] + '0'));
+								add_char((char)(snum[snum_len] + '0'));
 						}
 						for (int i = snum_len; i < width; i++)
 							add_char(' ');
@@ -264,9 +264,9 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 						for (int i = snum_len - 1; i >= 0; i--)
 						{
 							if (snum[len] > 9)
-								add_char((char)(snum[len] - 10 + 'a'));
+								add_char((char)(snum[snum_len] - 10 + 'a'));
 							else
-								add_char((char)(snum[len] + '0'));
+								add_char((char)(snum[snum_len] + '0'));
 						}
 					}
 				}
