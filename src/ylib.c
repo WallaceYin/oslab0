@@ -216,7 +216,8 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				break;
 
 			case 's':
-				char *str_temp = (char *)va_arg(ap, int);
+				char *str_temp;
+				str_temp = (char *)va_arg(ap, int);
 				if (strlen(str_temp) >= width)
 					add_buf(str_temp);
 				else if (flags & LEFT)
