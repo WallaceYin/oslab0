@@ -146,7 +146,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 
 		for (int i = 0; i < width; i++)
 			if (flags & BLANK)
-				buf_temp[i] = (char)' ';
+				buf_temp[i] = ' ';
 
 		//Precision is not supported yet.
 		//Length is not supported yet.
