@@ -178,36 +178,36 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				type = DEX;
 				while (num_temp > 0)
 				{
-					snum[len] = num_temp % 10;
-					num_temp \= 10;
-					len ++;
+					snum[snum_len] = num_temp % 10;
+					num_temp /= 10;
+					snum_len ++;
 				}
-				if (width > len)
+				if (width > snum_len)
 				{
 					if (flags | LEFT)
 					{
-						for (int i = len - 1; i >= 0; i--)
+						for (int i = snum_len - 1; i >= 0; i--)
 							add_char((char)(snum[i] + '0'));
-						for (int i = len; i < width; i++)
+						for (int i = snum_len; i < width; i++)
 							add_char(' ');
 					}
 					else if (flags | ZERO)
 					{
-						for (int i = 0; i < width - len; i++)
+						for (int i = 0; i < width - snum_len; i++)
 							add_char('0');
-						for (int i = len - 1; i >= 0; i--)
+						for (int i = snum_len - 1; i >= 0; i--)
 							add_char((char)(snum[i] + '0'));
 					}
 					else
 					{
-						for (int i = 0; i < width - len; i++)
+						for (int i = 0; i < width - snum_len; i++)
 							add_char(' ');
 						for (int i = len - 1; i >= 0; i--)
 							add_char((char)(snum[i] + '0'));
 					}
 				}
 				else
-					for (int i = len - 1; i >= 0; i--)
+					for (int i = snum_len - 1; i >= 0; i--)
 						add_char((char)(snum[i] + '0'));
 				break;
 
@@ -240,29 +240,29 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				type = HEX;
 				while (num_temp > 0)
 				{
-					snum[len] = num_temp % 16;
-					num_temp \= 16;
-					len++;
+					snum[snum_len] = num_temp % 16;
+					num_temp /= 16;
+					snum_len++;
 				}
-				if (width > len)
+				if (width > snum_len)
 				{
 					if (flags & LEFT)
 					{
-						for (int i = len - 1; i >= 0; i--)
+						for (int i = snum_len - 1; i >= 0; i--)
 						{
 							if (snum[len] > 9)
 								add_char((char)(snum[len] - 10 + 'a'));
 							else
 								add_char((char)(snum[len] + '0'));
 						}
-						for (int i = len; i < width; i++)
+						for (int i = snum_len; i < width; i++)
 							add_char(' ');
 					}
 					else if (flags & ZERO)
 					{
-						for (int i = len; i < width; i++)
+						for (int i = snum_len; i < width; i++)
 							add_char('0');
-						for (int i = len - 1; i >= 0; i--)
+						for (int i = snum_len - 1; i >= 0; i--)
 						{
 							if (snum[len] > 9)
 								add_char((char)(snum[len] - 10 + 'a'));
@@ -272,12 +272,12 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 					}
 				}
 				else
-					for (int i = len - 1; i >= 0; i--)
+					for (int i = snum_len - 1; i >= 0; i--)
 					{
 						if (snum[i] > 9)
-							add_char((char)(snum[len] - 10 + 'a'));
+							add_char((char)(snum[snum_len] - 10 + 'a'));
 						else
-							add_char((char)(snum[len] + '0'));
+							add_char((char)(snum[snum_len] + '0'));
 					}
 				break;
 		} //Type
