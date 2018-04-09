@@ -96,7 +96,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	};
 	int c2dex(char c)
 	{
-		if ((c >= '0') && (c <= '0'))
+		if ((c >= '0') && (c <= '9'))
 			return (c - '0');
 		return -1;
 	};
