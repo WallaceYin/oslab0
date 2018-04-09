@@ -285,7 +285,8 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				default: type = NON_TYPE;
 				break;
 		} //Type
-
+		
+		p++;
 	}	
 	return ret; 
 }
