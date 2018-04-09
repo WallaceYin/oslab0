@@ -111,12 +111,12 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		flags = 0;
 		if (*p == '\0')
 			break;
-		/*if (*p != '%')
-		{*/
+		if (*p != '%')
+		{
 			add_char(*p);
 			p++;
 			continue;
-		/*}*/ //TODO: Remove this later!!!
+		}
 
 		ret ++;
 		p++; //Skip '%'
