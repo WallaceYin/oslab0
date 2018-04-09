@@ -34,7 +34,7 @@ char *strcpy(char *dest, const char *src)
 	return (char *)memcpy(dest, src, strlen(src));
 }
 
-int strcmp(const char str_1, const char str_2)
+int strcmp(const char *str_1, const char *str_2)
 {
 	int i;
 	for (i = 0; ; i++)
