@@ -216,20 +216,20 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				break;
 
 			case 's':
-				buf_temp = (char *)va_arg(ap, int);
-				if (strlen(buf_temp) >= width)
-					add_buf(buf_temp);
+				char *str_temp = (char *)va_arg(ap, int);
+				if (strlen(str_temp) >= width)
+					add_buf(str_temp);
 				else if (flags & LEFT)
 				{
-					add_buf(buf_temp);
-					for (int i = strlen(buf_temp); i < width; i++)
+					add_buf(str_temp);
+					for (int i = strlen(str_temp); i < width; i++)
 						add_char(' ');
 				}
 				else
 				{
-					for (int i = strlen(buf_temp); i < width; i++)
+					for (int i = strlen(str_temp); i < width; i++)
 						add_char(' ');
-					add_buf(buf_temp);
+					add_buf(str_temp);
 				}
 				break;
 
