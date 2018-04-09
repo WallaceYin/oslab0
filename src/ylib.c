@@ -1,5 +1,6 @@
 #include <ylib.h>
 
+#ifdef DEBUG
 void *memset(void *arr, int val, size_t n)
 {
 	for (int i = 0; i < n; i++)
@@ -281,3 +282,5 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	}	
 	return ret; 
 }
+
+#endif
