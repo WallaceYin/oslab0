@@ -59,11 +59,11 @@ int printf(const char *fmt, ...)
 	va_list ap;
 	va_start(ap, fmt);
 	memset(str_out, 0, 1024);
-	//int n = vsprintf(str_out, fmt, ap);
+	int n = vsprintf(str_out, fmt, ap);
 	for (int i = 0; i < strlen(fmt); i++)
 		_putc(fmt[i]);
 	va_end(ap);
-	return 1;
+	return n;
 }
 
 //Format String: %[Flags][Width][.precision][Length][Type]
@@ -111,11 +111,11 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		flags = 0;
 		if (*p == '\0')
 			break;
-		if (*p != '%')
-		{
+		/*if (*p != '%')
+		{*/
 			add_char(*p);
 			continue;
-		}
+		/*}*/ //TODO: Remove this later!!!
 
 		ret ++;
 		p++; //Skip '%'
