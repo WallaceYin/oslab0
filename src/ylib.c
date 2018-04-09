@@ -109,7 +109,8 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		width = 0;
 		flags = 0;
 		type = NON_TYPE;
-
+		if (!*p)
+			break;
 		if (*p != '%')
 		{
 			add_char(*p);
