@@ -263,7 +263,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 							add_char('0');
 						for (int i = snum_len - 1; i >= 0; i--)
 						{
-							if (snum[len] > 9)
+							if (snum[snum_len] > 9)
 								add_char((char)(snum[snum_len] - 10 + 'a'));
 							else
 								add_char((char)(snum[snum_len] + '0'));
