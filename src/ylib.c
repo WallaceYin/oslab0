@@ -273,7 +273,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 					}
 				break;
 
-				default: type = NON_TYPE;
+			default:
 				break;
 		} //Type
 		
