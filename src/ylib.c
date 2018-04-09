@@ -279,6 +279,9 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 							add_char((char)(snum[snum_len] + '0'));
 					}
 				break;
+
+				default: type = NON_TYPE;
+				break;
 		} //Type
 
 	}
