@@ -1,8 +1,10 @@
 #include <am.h>
 #include <amdev.h>
+#include <stdarg.h>
+#include <stdio.h>
+
 #include <ylib.h>
 
-#ifdef DEBUG
 void *memset(void *arr, int val, size_t n)
 {
 	for (int = 0; i < n; i++)
@@ -49,26 +51,16 @@ int strcmp(const char str_1, const char str_2)
 
 int printf(const char *fmt, ...)
 {
-	char *ap;
-	ap = ((char *)&fmt) + sizeof(fmt);
-	char *ic;
-	for (ic = fmt;;)
-	{
-		if (!*ic)
-			break;
-		if (*ic == '%')
-		{
-			char *icc = ic;
-			while (1)
-			{
-				icc++;
-				if ()
-			}
-		}
-			
-	}
+	va_list ap;
+	va_start(ap, fmt);
+	char *outp = (char *)malloc(256 * sizeof(char));
+	memset(outp, 0, 256);
+	int n = vsprintf(outp, ap, fmt);
+	va_end(ap);
+	for (int i = 0; i < n; i++)
+		_putc(outp);
+	free(outp);
+	return n;
 }
-
-#endif
 
 
