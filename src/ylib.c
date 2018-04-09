@@ -80,7 +80,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	char buf_temp[64];
 	char ch_temp;
 	int num_temp;
-
+	char *str_temp = NULL;
 	//-----------------------------------------------------------------
 	int buf_len = 0;
 	void add_char(char ch)
@@ -216,7 +216,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				break;
 
 			case 's':
-				char *str_temp;
 				str_temp = (char *)va_arg(ap, int);
 				if (strlen(str_temp) >= width)
 					add_buf(str_temp);
