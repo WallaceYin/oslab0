@@ -56,7 +56,7 @@ int printf(const char *fmt, ...)
 	va_start(ap, fmt);
 	char *outp = (char *)malloc(256 * sizeof(char));
 	memset(outp, 0, 256);
-	int n = vsprintf(outp, ap, fmt);
+	int n = vsprintf(outp, fmt, ap);
 	va_end(ap);
 	for (int i = 0; i < n; i++)
 		_putc(outp[i]);
