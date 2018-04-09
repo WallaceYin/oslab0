@@ -34,7 +34,7 @@ char *strcpy(char *dest, const char *src)
 	return (char *)memcpy(dest, src, strlen(src));
 }
 
-int strcmp(const char *str_1, const char *str_2)
+/*int strcmp(const char *str_1, const char *str_2)
 {
 	int i;
 	for (i = 0; ; i++)
@@ -48,7 +48,7 @@ int strcmp(const char *str_1, const char *str_2)
 			return str_2[i] - str_1[i];
 	}
 	return 0;
-}
+}*/
 
 int printf(const char *fmt, ...)
 {
