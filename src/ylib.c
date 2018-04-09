@@ -138,13 +138,10 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			break;
 		} //Flags
 
-		for (;;)
+		while (c2dex(*p) != -1)
 		{
-			while (c2dex(*p) != -1)
-			{
-				width = width * 10 + c2dex(*p);
-				p++;
-			}
+			width = width * 10 + c2dex(*p);
+			p++;
 		} //Width
 
 		for (int i = 0; i < width; i++)
