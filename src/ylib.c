@@ -1,6 +1,5 @@
 #include <ylib.h>
 
-#ifdef DEBUG
 void *memset(void *arr, int val, size_t n)
 {
 	for (int i = 0; i < n; i++)
@@ -78,7 +77,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	int width;
 	int ret = 0;
 
-	//int type = NON_TYPE;
 	//char buf_temp[64];
 	char ch_temp;
 	int num_temp;
@@ -94,6 +92,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	void add_buf(char *str)
 	{
 		strcat(buf, str);
+		buf_len+=strlen(str);
 	};
 	int c2dex(char c)
 	{
@@ -108,7 +107,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	char *p;
 	for (p = (char *)fmt;;)
 	{
-		//precision = -1;
 		width = 0;
 		flags = 0;
 		if (*p == '\0')
@@ -282,5 +280,3 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	}	
 	return ret; 
 }
-
-#endif
