@@ -114,7 +114,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		/*if (*p != '%')
 		{*/
 			add_char(*p);
-			p++
+			p++;
 			continue;
 		/*}*/ //TODO: Remove this later!!!
 
