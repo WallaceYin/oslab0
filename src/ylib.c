@@ -74,6 +74,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 {
 	int flags;
 	int width;
+	int ret = 0;
 	//int precision;//Float is not supported yet, so this would not be used.
 	//int length = 0;
 	int type = NON_TYPE;
@@ -116,7 +117,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 			add_char(*p);
 			continue;
 		}
-
+		ret ++;
 		p++; //Skip '%'
 
 		for (;;)
@@ -285,7 +286,6 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 				break;
 		} //Type
 
-	}
-	
-
+	}	
+	return ret; 
 }
