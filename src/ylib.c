@@ -74,13 +74,12 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 {
 	int flags;
 	int width;
-	int precision;//Float is not supported yet, so this would not be used.
-	int length;
+	//int precision;//Float is not supported yet, so this would not be used.
+	//int length = 0;
 	int type;
 	char buf_temp[64];
 	char ch_temp;
 	int num_temp;
-	int base; //support dex and hex
 
 	//-----------------------------------------------------------------
 	int buf_len = 0;
@@ -159,7 +158,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 		switch (*p)
 		{
 			case 'c':
-				ch_temp = va_arg(ap, char);
+				ch_temp = (char)va_arg(ap, int);
 				type = CHAR;
 				if (width == 0) buf_temp[width] = ch_temp;
 				else if (flags | LEFT) buf_temp[0] = ch_temp;
@@ -202,7 +201,7 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 					{
 						for (int i = 0; i < width - snum_len; i++)
 							add_char(' ');
-						for (int i = len - 1; i >= 0; i--)
+						for (int i = snum_len - 1; i >= 0; i--)
 							add_char((char)(snum[i] + '0'));
 					}
 				}
