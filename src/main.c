@@ -96,11 +96,12 @@ static void video_test(_Device *dev) {
   for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++) 
 			draw_rect(&pixel, width / 2 - 50 + x, height / 2 - 50 + y, 1, 1);
+	draw_sync();
 	pixel = 0x006a005f;
 	for (int x = 0; x < 100; x++)
 		for (int y = 0; y < 100; y++)
 			draw_rect(&pixel, x, y, 1, 1);
-	//draw_sync();
+	draw_sync();
   printf("You should see a purple square on the screen.\n");
 }
 
