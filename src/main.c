@@ -1,6 +1,7 @@
 #include <am.h>
 #include <amdev.h>
 #include <ylib.h>
+#include <device.h>
 #define TEST
 
 static void input_test(_Device *dev);
