@@ -53,7 +53,7 @@ static void input_test(_Device *dev) {
   //printf("Input device test skipped.\n");
 	int key = read_key();
 	for (;;)
-		if (key != _KEY_NONE)
+		//if (key != _KEY_NONE)
 			printf("keycode received: %d\n", key);
 }
 
