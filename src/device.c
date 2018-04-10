@@ -22,7 +22,7 @@ uint32_t up_time(void)
 int read_key(void)
 {
 	_Device *dev = _device(1);
-	_KdbReg readkey;
+	_KbdReg readkey;
 	int Keydown, Keycode;
 	dev->read(_DEVREG_INPUT_KBD, &readkey, sizeof(readkey));
 	Keydown = readkey.keydown;
