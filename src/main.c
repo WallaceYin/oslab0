@@ -58,7 +58,7 @@ static void input_test(_Device *dev) {
 }
 
 static void timer_test(_Device *dev) {
-  _UptimeReg uptime;
+  //_UptimeReg uptime;
   uint32_t t0, t1;
 
 	/*
