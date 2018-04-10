@@ -17,6 +17,7 @@ uint32_t up_time(void)
 		else
 			continue;
 	}
+	return (uint32_t)-1;
 }
 
 int read_key(void)
