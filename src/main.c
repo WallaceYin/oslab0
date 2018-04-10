@@ -30,6 +30,7 @@ int main() {
 	//TODO: enjoy a game!!!
 	unsigned next_frame = 0;
 	int key;
+
 	game_init();
 	for (;;)
 	{
@@ -48,20 +49,30 @@ int main() {
 }
 
 static void input_test(_Device *dev) {
-  printf("Input device test skipped.\n");
+  //printf("Input device test skipped.\n");
+	int key = read_key();
+	for (;;)
+		if (key != _KEY_NONE)
+			printf("keycode received: %d\n", key);
 }
 
 static void timer_test(_Device *dev) {
   _UptimeReg uptime;
   uint32_t t0, t1;
 
+	/*
   dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
   t0 = uptime.lo;
+	*/
+	t0 = up_time();
 
   for (int volatile i = 0; i < 10000000; i ++) ;
 
+	/*
   dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
   t1 = uptime.lo;
+	*/
+	t1 = up_time();
 
   printf("Loop 10^7 time elapse: %d ms\n", t1 - t0);
 }
@@ -72,6 +83,7 @@ static void video_test(_Device *dev) {
   printf("Screen size: %d x %d\n", info.width, info.height);
   for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++) {
+			/*
       _FBCtlReg ctl;
       uint32_t pixel = 0x006a005f;
       ctl.x = info.width / 2 - 50 + x;
@@ -79,7 +91,10 @@ static void video_test(_Device *dev) {
       ctl.w = ctl.h = 1;
       ctl.sync = 1;
       ctl.pixels = &pixel;
-      dev->write(_DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));
+      dev->write(_DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));*/
+			uint32_t pixel = 0x006a005f;
+			draw_rect(&pixel, x, y, 1, 1);
+			draw_sync();
     }
   printf("You should see a purple square on the screen.\n");
 }
