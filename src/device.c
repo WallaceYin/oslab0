@@ -23,9 +23,8 @@ int read_key(void)
 {
 	_Device *dev = _device(1);
 	_KbdReg readkey;
-	int Keydown, Keycode;
+	int Keycode;
 	dev->read(_DEVREG_INPUT_KBD, &readkey, sizeof(readkey));
-	Keydown = readkey.keydown;
 	Keycode = readkey.keycode;
 	return Keycode;
 }
