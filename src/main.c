@@ -57,7 +57,7 @@ static void input_test(_Device *dev) {
 		key = read_key();
 		if (key != _KEY_NONE)
 			printf("keycode received: %04x\n", key);
-		if (key == _KEY_ESCAPE + 0x8000)
+		if (key == _KEY_ESCAPE+ 0x8000)
 			break;
 	}
 }
@@ -84,9 +84,14 @@ static void timer_test(_Device *dev) {
 }
 
 static void video_test(_Device *dev) {
+	/*
   _VideoInfoReg info;
   dev->read(_DEVREG_VIDEO_INFO, &info, sizeof(info));
-  printf("Screen size: %d x %d\n", info.width, info.height);
+	*/
+	int width, height;
+	width = screen_width();
+	height = screen_height();
+  printf("Screen size: %d x %d\n", width, height);
   for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++) {
 			/*
@@ -99,7 +104,7 @@ static void video_test(_Device *dev) {
       ctl.pixels = &pixel;
       dev->write(_DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));*/
 			uint32_t pixel = 0x006a005f;
-			draw_rect(&pixel, x, y, 1, 1);
+			draw_rect(&pixel, width / 2 - 50 + x, height / 2 - 50, 1, 1);
 			draw_sync();
     }
   printf("You should see a purple square on the screen.\n");
