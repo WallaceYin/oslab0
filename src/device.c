@@ -42,7 +42,7 @@ void draw_rect(uint32_t *pixels, int x, int y, int w, int h)
 	fbctlreg.h = h;
 	fbctlreg.pixels = pixels;
 	fbctlreg.sync = 0;
-	dev->write(_DEVREG, &fbctlreg, sizeof(fbctlreg));
+	dev->write(_DEVREG_VIDEO_FBCTL, &fbctlreg, sizeof(fbctlreg));
 }
 //WARNING: Something may be wrong here.
 void draw_sync(void)
@@ -50,7 +50,7 @@ void draw_sync(void)
 	_Device *dev = _device(3);
 	_FBCtlReg fbctlreg;
 	fbctlreg.sync = 1;
-	dev->write(_DEVREG, &fbctlreg, sizeof(fbctlreg));
+	dev->write(_DEVREG_VIDEO_FBCTL, &fbctlreg, sizeof(fbctlreg));
 }
 
 int screen_width(void)
