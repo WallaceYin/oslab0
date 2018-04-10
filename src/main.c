@@ -104,7 +104,7 @@ static void video_test(_Device *dev) {
       ctl.pixels = &pixel;
       dev->write(_DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));*/
 			uint32_t pixel = 0x006a005f;
-			draw_rect(&pixel, width / 2 - 50 + x, height / 2 - 50, 1, 1);
+			draw_rect(&pixel, width / 2 - 50 + x, height / 2 - 50 + y, 1, 1);
 			draw_sync();
     }
   printf("You should see a purple square on the screen.\n");
