@@ -17,7 +17,7 @@ int main() {
   for (int n = 1; ; n++) {
     _Device *dev = _device(n);
     if (!dev) break;
-    printf("*Num %d Device: %s\n",n, dev->name);
+    printf("*Device: %s\n", dev->name);
     switch (dev->id) {
       case _DEV_INPUT: input_test(dev); break;
       case _DEV_TIMER: timer_test(dev); break;

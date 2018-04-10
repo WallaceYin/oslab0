@@ -27,8 +27,6 @@ int read_key(void)
 	dev->read(_DEVREG_INPUT_KBD, &readkey, sizeof(readkey));
 	Keydown = readkey.keydown;
 	Keycode = readkey.keycode;
-	if (!Keydown)
-		return _KEY_NONE;
 	return Keycode;
 }
 
