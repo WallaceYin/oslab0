@@ -51,10 +51,13 @@ int main() {
 
 static void input_test(_Device *dev) {
   //printf("Input device test skipped.\n");
-	int key = read_key();
+	int key;
 	for (;;)
-		//if (key != _KEY_NONE)
-			printf("keycode received: %d\n", key);
+	{
+		key = read_key();
+		if (key != _KEY_NONE)
+			printf("keycode received: %04x\n", key);
+	}
 }
 
 static void timer_test(_Device *dev) {

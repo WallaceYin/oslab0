@@ -23,10 +23,14 @@ int read_key(void)
 {
 	_Device *dev = _device(1);
 	_KbdReg readkey;
-	int Keycode;
+	int Keydown, Keycode;
 	dev->read(_DEVREG_INPUT_KBD, &readkey, sizeof(readkey));
 	Keycode = readkey.keycode;
-	return Keycode;
+	Keydown = readkey.keydown;
+	if (Keydown)
+		return Keycode + 0x8000;
+	else
+		return Keycode;
 }
 
 void draw_rect(uint32_t *pixels, int x, int y, int w, int h)
