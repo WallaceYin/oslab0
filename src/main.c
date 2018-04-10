@@ -57,6 +57,8 @@ static void input_test(_Device *dev) {
 		key = read_key();
 		if (key != _KEY_NONE)
 			printf("keycode received: %04x\n", key);
+		if (key == _KEY_ESC + 0x8000)
+			break;
 	}
 }
 
