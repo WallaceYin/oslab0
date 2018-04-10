@@ -96,8 +96,8 @@ static void video_test(_Device *dev) {
     for (int y = 0; y < 100; y++) {
 			uint32_t pixel = 0x006a005f;
 			draw_rect(&pixel, width / 2 - 50 + x, height / 2 - 50 + y, 1, 1);
-    }
-	draw_sync();
+  }
+	//draw_sync();
   printf("You should see a purple square on the screen.\n");
 }
 
