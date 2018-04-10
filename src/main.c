@@ -92,21 +92,16 @@ static void video_test(_Device *dev) {
 	width = screen_width();
 	height = screen_height();
   printf("Screen size: %d x %d\n", width, height);
-  for (int x = 0; x < 100; x++)
+  /*for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++) {
-			/*
-      _FBCtlReg ctl;
-      uint32_t pixel = 0x006a005f;
-      ctl.x = info.width / 2 - 50 + x;
-      ctl.y = info.height / 2 - 50 + y;
-      ctl.w = ctl.h = 1;
-      ctl.sync = 1;
-      ctl.pixels = &pixel;
-      dev->write(_DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));*/
 			uint32_t pixel = 0x006a005f;
 			draw_rect(&pixel, width / 2 - 50 + x, height / 2 - 50 + y, 1, 1);
     }
 	draw_sync();
+	*/
+	uint32_t pixel = 0x006a005f;
+	draw_rect(&pixel, width / 2 - 50, height / 2 - 50, 100, 100);
+
   printf("You should see a purple square on the screen.\n");
 }
 
