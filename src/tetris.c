@@ -57,7 +57,7 @@ void game_init(void)
 {
 	memset((void *)(trs.pm), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	memset((void *)(trs.bg), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
-	plist_init(void);
+	plist_init();
 	new_piece(piece);
 }
 
@@ -160,7 +160,7 @@ void new_piece(_Piece *piece)
 	int Rand = rand() % 40;
 	int posrand = Rand % 8;
 	int typerand = Rand % 5;
-	piece->x = MIN_DIST * Rand;
+	piece->x = MIN_DIST * posrand;
 	piece->y = 0;
 	piece->w = pl[typerand].W * MIN_DIST;
 	piece->h = pl[typerand].H * MIN_DIST;
@@ -214,8 +214,8 @@ void plist_init(void)
 				_pl_3[j][i] = 0x00000000;
 		}
 	//piecelist #5
-	for (int j = 0; j < MIN * 3; j++)
-		for (int i = 0; i < MIN * 3; i++)
+	for (int j = 0; j < MIN_DIST * 3; j++)
+		for (int i = 0; i < MIN_DIST * 3; i++)
 		{
 			if (j >= MIN_DIST && j < MIN_DIST * 2)
 				_pl_4[j][i] = 0x00003e20;
