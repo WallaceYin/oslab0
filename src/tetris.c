@@ -125,6 +125,9 @@ void draw_piece(_Piece *piece)
 
 void piece_move(_Piece *piece, int direction)
 {
+#ifdef DEBUG
+	printf("Move.\n");
+#endif
 	switch (direction)
 	{
 		case (STILL):
@@ -148,6 +151,9 @@ void piece_move(_Piece *piece, int direction)
 
 void add_bg(_Piece *piece)
 {
+#ifdef DEBUG
+	printf("Locked in the Background.\n");
+#endif
 	int x = piece->x;
 	int y = piece->y;
 	int w = piece->w;
