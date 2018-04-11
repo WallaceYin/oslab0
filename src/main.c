@@ -83,7 +83,7 @@ static void timer_test(_Device *dev) {
   printf("Loop 10^7 time elapse: %d ms\n", t1 - t0);
 }
 
-uint32_t pix[640][480];
+uint32_t pix[480][640];
 static void video_test(_Device *dev) {
 	/*
   _VideoInfoReg info;
@@ -105,10 +105,10 @@ static void video_test(_Device *dev) {
 	//draw_sync();*/
 	for (int i = 0; i < 640; i++)
 		for (int j = 0; j < 480; j++)
-			pix[i][j] = 0x006a005f;
+			pix[j][i] = 0x006a005f;
 	for (int i = 0; i < 100; i++)
 		for (int j = 0; j < 100; j++)
-			pix[320 - 50 + i][240 - 50 + j] = 0x00006a4a;
+			pix[240 - 50 + j][320 - 50 + i] = 0x00006a4a;
 	draw_rect((uint32_t *)pix, 0, 0, 640, 480);
   printf("You should see a purple square on the screen.\n");
 }
