@@ -129,6 +129,11 @@ void piece_move(_Piece *piece, int direction)
 	printf("Move.\n");
 #endif
 	int movable;
+	int x = piece->x;
+	int y = piece->y;
+	int w = piece->w;
+	int h = piece->h;
+	uint32_t *pixel = piece->pixel;
 	switch (direction)
 	{
 		case (STILL):
@@ -136,62 +141,45 @@ void piece_move(_Piece *piece, int direction)
 
 		case (LEFT):
 			movable = 1;
-			if (piece->x - MIN_DIST >= 0)
+			if (x < MIN_DIST)
+				movable = 0;
+			else
 			{
-				for (int j = 0; j < piece->h; j++)
-					for (int i = 0; i < piece->w; i++)
-					{
-						if (*(piece->pixel + j * piece->w + i) != 0x00000000 && (trs.bg[piece->y + j][piece->x - MIN_DIST + i] != 0x00000000))
+				for (int j = 0; j < h; j++)
+					for (int i = 0; i < w; i++)
+						if (*(pixel + j * w + i) != 0 && trs.bg[y + j][x + i - MIN_DIST] != 0)
 							movable = 0;
-					}
-				if (movable)
-					piece->x -= MIN_DIST;
-
 			}
+			if (movable)
+				piece->x -= MIN_DIST;
 			break;
 		
 		case (RIGHT):
 			movable = 1;
-			if (piece->x + piece->w + MIN_DIST <= SCREEN_WIDTH)
-				piece->x += MIN_DIST;
-			else
-			{
-				for (int j = 0; j < piece->h; j++)
-					for (int i = 0; i < piece->w; i++)
-					{
-						if (*(piece->pixel + j * piece->w + i) == 0x00000000 && (piece->x + i + MIN_DIST > SCREEN_WIDTH))
-							continue;
-						else if (piece->x + i + MIN_DIST <= SCREEN_WIDTH)
-							continue;
-						if (*(piece->pixel + j * piece->w + i) != 0x00000000 && (trs.bg[piece->y + j][piece->x - MIN_DIST + i] != 0x00000000))
-						{}
-						else
-							continue;
+			for (int j = 0; j < h; j++)
+				for (int i = 0; i < w; i++)
+				{
+					if (*(pixel + j * w + i) != 0 && x + i + MIN_DIST < SCREEN_WIDTH && trs.bg[y + j][x + i + MIN_DIST] != 0)
 						movable = 0;
-					}
-				if (movable)
-					piece->x += MIN_DIST;
-			}
+					else if (*(pixel + j * w + i) != 0 && x + i + MIN_DIST > SCREEN_WIDTH)
+						movable = 0;
+				}
+			if (movable)
+				piece->x += MIN_DIST;
 			break;
 
 		case (DOWN):
 			movable = 1;
-			if (piece->y + piece->h + MIN_DIST <= SCREEN_HEIGHT)
-				piece->y += MIN_DIST;
-			else
-			{
-				for (int j = 0; j < piece->h; j++)
-					for (int i = 0; i < piece->w; i++)
-					{
-						if (*(piece->pixel + j * piece->w + i) == 0x00000000 && (piece->y + j + MIN_DIST > SCREEN_HEIGHT))
-							continue;
-						else if (piece->y + j + MIN_DIST <= SCREEN_HEIGHT)
-							continue;
+			for (int j = 0; j < h; j++)
+				for (int i = 0; i < w; i++)
+				{	
+					if (*(pixel + j * w + i) != 0 && y + j + MIN_DIST < SCREEN_WIDTH && trs.bg[y + j + MIN_DIST][x + i] != 0)
 						movable = 0;
-					}
-				if (movable)
-					piece->y += MIN_DIST;
-			}
+					else if (*(pixel + j * w + i) != 0 && y + j + MIN_DIST > SCREEN_HEIGHT)
+						movable = 0;
+				}
+			if (movable)
+				piece->y += MIN_DIST;
 	}
 }
 
