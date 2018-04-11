@@ -85,6 +85,7 @@ void game_process(void)
 
 void screen_update(void)
 {
+	memset((void *)(trs.pm), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	draw_piece(piece);
 	for (int j = 0; j < SCREEN_HEIGHT; j++)
 		for (int i = 0; i < SCREEN_WIDTH; i++)
