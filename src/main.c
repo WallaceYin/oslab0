@@ -63,7 +63,7 @@ static void input_test(_Device *dev) {
 }
 
 static void timer_test(_Device *dev) {
-  uint32_t t0, t1;
+  uint32_t t0;
 
 	/*
   dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
