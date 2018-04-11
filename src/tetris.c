@@ -33,11 +33,13 @@ void kbd_event(int key)
 			break;
 
 		case (_KEY_A): //Left Move
-			//TODO
+			if (trs.status)
+				piece_move(piece, LEFT);
 			break;
 
 		case (_KEY_D): //Right Move
-			//TODO
+			if (trs.status)
+				piece_move(piece, RIGHT);
 			break;
 
 		case (_KEY_W): //Rotate
@@ -45,7 +47,8 @@ void kbd_event(int key)
 			break;
 
 		case (_KEY_S): //Down Move
-			//TODO
+			if (trs.status && !bottom_hit(piece))
+				piece_move(piece, DOWN);
 			break;
 	}
 }
@@ -54,6 +57,7 @@ void game_init(void)
 {
 	memset((void *)(trs.pm), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	memset((void *)(trs.bg), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
+	plist_init(void);
 	new_piece(piece);
 }
 
@@ -152,7 +156,15 @@ void add_bg(_Piece *piece)
 
 void new_piece(_Piece *piece)
 {
-	//TODO
+	srand(raw_time());
+	int Rand = rand() % 40;
+	int posrand = Rand % 8;
+	int typerand = Rand % 5;
+	piece->x = MIN_DIST * Rand;
+	piece->y = 0;
+	piece->w = pl[typerand].W * MIN_DIST;
+	piece->h = pl[typerand].H * MIN_DIST;
+	piece->pixel = pl[typerand].pixel;
 }
 
 int bottom_hit(_Piece *piece)
@@ -164,4 +176,59 @@ int bottom_hit(_Piece *piece)
 			if ((*(piece->pixel + (y - piece->y) * piece->w + x - piece->x) != 0x00000000) && (trs.bg[y + MIN_DIST][x] != 0x00000000))
 				return 1;
 	return 0;
+}
+
+void plist_init(void)
+{
+	//piecelist #1
+	for (int j = 0; j < MIN_DIST * 2; j++)
+		for (int i = 0; i < MIN_DIST * 2; i++)
+			_pl_0[j][i] = 0x00006a4a;
+	//piecelist #2
+	for (int j = 0; j < MIN_DIST * 3; j++)
+		for (int i = 0; i < MIN_DIST * 3; i++)
+		{
+			if (i < 2 * MIN_DIST && j < MIN_DIST)
+				_pl_1[j][i] = 0x004f3a00;
+			else if (i >= MIN_DIST && j >= MIN_DIST && j < MIN_DIST * 2 )
+				_pl_1[j][i] = 0x004f3a00;
+			else
+				_pl_1[j][i] = 0x00000000;
+		}
+	//piecelist #3
+	for (int j = 0; j < MIN_DIST * 2; j++)
+		for (int i = 0; i < MIN_DIST * 2; i++)
+		{
+			if (j >= MIN_DIST && i < MIN_DIST)
+				_pl_2[j][i] = 0x00000000;
+			else
+				_pl_2[j][i] = 0x006a0020;
+		}
+	//piecelist #4
+	for (int j = 0; j < MIN_DIST * 3; j++)
+		for (int i = 0; i < MIN_DIST * 3; i++)
+		{
+			if (j >= MIN_DIST && j < MIN_DIST * 2)
+				_pl_3[j][i] = 0x003f4b00;
+			else
+				_pl_3[j][i] = 0x00000000;
+		}
+	//piecelist #5
+	for (int j = 0; j < MIN * 3; j++)
+		for (int i = 0; i < MIN * 3; i++)
+		{
+			if (j >= MIN_DIST && j < MIN_DIST * 2)
+				_pl_4[j][i] = 0x00003e20;
+			else if (j < MIN_DIST && i >= MIN_DIST && i < MIN_DIST * 2)
+				_pl_4[j][i] = 0x00003e20;
+			else
+				_pl_4[j][i] = 0x00000000;
+		}
+	
+	pl[0].W = 2; pl[0].H = 2; pl[0].pixel = (uint32_t *)_pl_0;
+	pl[1].W = 3; pl[1].H = 3; pl[1].pixel = (uint32_t *)_pl_1;
+	pl[2].W = 2; pl[2].H = 2; pl[2].pixel = (uint32_t *)_pl_2;
+	pl[3].W = 3; pl[3].H = 3; pl[3].pixel = (uint32_t *)_pl_3;
+	pl[4].W = 3; pl[4].H = 3; pl[4].pixel = (uint32_t *)_pl_4;
+
 }

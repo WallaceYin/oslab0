@@ -29,6 +29,20 @@ uint32_t up_time(void)
 		return t0 + 0xffffffff - timebase;
 	return t0 - timebase;
 }
+uint32_t raw_time(void)
+{
+	_Device *dev = _device(2);
+	_UptimeReg uptime;
+	uint32_t t0;
+	dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
+	t0 = uptime.lo;
+	return t0;
+}
+/*
+	time_base: get current time and set it as base for up_time
+	up_time: get time passed by since time_base is called
+	raw_time: get current time
+*/
 
 int read_key(void)
 {
