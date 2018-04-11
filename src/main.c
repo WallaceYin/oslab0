@@ -50,8 +50,8 @@ int main() {
 }
 
 static void input_test(_Device *dev) {
-  //printf("Input device test skipped.\n");
-	int key;
+  printf("Input device test skipped.\n");
+	/*int key;
 	for (;;)
 	{
 		key = read_key();
@@ -59,7 +59,7 @@ static void input_test(_Device *dev) {
 			printf("keycode received: %04x\n", key);
 		if (key == _KEY_ESCAPE)
 			break;
-	}
+	}*/
 }
 
 static void timer_test(_Device *dev) {
@@ -108,7 +108,7 @@ static void video_test(_Device *dev) {
 			pix[i][j] = 0x006a005f;
 	for (int i = 0; i < 100; i++)
 		for (int j = 0; j < 100; j++)
-			pix[width / 2 - 50 + i][height / 2 - 50 + j] = 0x4f0000;
+			pix[width / 2 - 50 + i][height / 2 - 50 + j] = 0x4f004a;
 	draw_rect((uint32_t *)pix, 0, 0, 640, 480);
   printf("You should see a purple square on the screen.\n");
 }
