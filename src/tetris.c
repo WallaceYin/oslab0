@@ -86,7 +86,7 @@ void screen_update(void)
 	for (int j = 0; j < SCREEN_HEIGHT; j++)
 		for (int i = 0; i < SCREEN_WIDTH; i++)
 			if (trs.pm[j][i] == 0x00000000)
-				trs.pm[j][i] = bg[j][i];
+				trs.pm[j][i] = trs.bg[j][i];
 	draw_rect((uint32_t *)trs.pm, LEFT_BOND, UP_BOND, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
@@ -152,7 +152,7 @@ void new_piece(_Piece *piece)
 
 int bottom_hit(_Piece *piece)
 {
-	if (y + MIN_DIST >= SCREEN_HEIGHT)
+	if (piece->y + MIN_DIST >= SCREEN_HEIGHT)
 		return 1;
 	for (int y = piece->y; y < piece->y + piece->h; y++)
 		for (int x = piece->x; x < piece->x + piece->w; x++)
