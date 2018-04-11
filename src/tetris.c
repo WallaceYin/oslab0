@@ -54,7 +54,7 @@ void game_init(void)
 {
 	memset((void *)(trs.pm), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	memset((void *)(trs.bg), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
-	new_piece(_Piece piece);
+	new_piece(piece);
 }
 
 unsigned int time_record = 0xffffffff;
@@ -82,6 +82,11 @@ void game_process(void)
 void screen_update(void)
 {
 	//TODO: combine Piece and background
+	draw_piece(piece);
+	for (int j = 0; j < SCREEN_HEIGHT; j++)
+		for (int i = 0; i < SCREEN_WIDTH; i++)
+			if (trs.pm[j][i] == 0x00000000)
+				trs.pm[j][i] = bg[j][i];
 	draw_rect((uint32_t *)trs.pm, LEFT_BOND, UP_BOND, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
@@ -105,9 +110,11 @@ void line_eliminate(void)
 
 void draw_piece(_Piece *piece)
 {
-	for (int i = 0; i < h; i++)
-		for (int j = 0; j < w; j++)
-			trs.pm[piece->x + j][piece->y + i] = *(piece->pixel + i * w + j);
+	int w = piece->w;
+	int h = piece->h;
+	for (int j = 0; j < h; j++)
+		for (int i = 0; i < w; i++)
+			if (*(piece->pixel + j * w + i) != 0x00000000) trs.pm[piece->y + j][piece->x + i] = *(piece->pixel + j * w + i);
 }
 
 void piece_move(_Piece *piece, int direction)
@@ -149,7 +156,7 @@ int bottom_hit(_Piece *piece)
 		return 1;
 	for (int y = piece->y; y < piece->y + piece->h; y++)
 		for (int x = piece->x; x < piece->x + piece->w; x++)
-			if ((*(piece->pixel + y * piece->w + x) != 0x00000000) && (trs.bg[y + MIN_DIST][x] != 0x00000000))
+			if ((*(piece->pixel + (y - piece->y) * piece->w + x - piece->x) != 0x00000000) && (trs.bg[y + MIN_DIST][x] != 0x00000000))
 				return 1;
 	return 0;
 }
