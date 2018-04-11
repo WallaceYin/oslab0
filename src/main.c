@@ -72,15 +72,22 @@ static void timer_test(_Device *dev) {
 	time_base();
 	t0 = up_time();
 
-  for (int volatile i = 0; i < 10000000; i ++) ;
+  //for (int volatile i = 0; i < 10000000; i ++) ;
 
 	/*
   dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
   t1 = uptime.lo;
 	*/
-	t1 = up_time();
+	//t1 = up_time();
 
-  printf("Loop 10^7 time elapse: %d ms\n", t1 - t0);
+  //printf("Loop 10^7 time elapse: %d ms\n", t1 - t0);
+	for (;;)
+	{
+		while (t0 < 1000)
+			t0 = up_time();
+		printf("1s passed\n");
+		time_base();
+	}
 }
 
 uint32_t pix[480][640];
