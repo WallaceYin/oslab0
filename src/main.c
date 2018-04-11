@@ -3,7 +3,10 @@
 #include <ylib.h>
 #include <device.h>
 #include <tetris.h>
+#define FPS 20
+
 //#define TEST
+
 #ifdef TEST
 static void input_test(_Device *dev);
 static void timer_test(_Device *dev);
@@ -34,11 +37,10 @@ int main() {
 	int key;
 	game_block();
 	time_base();
-	int FPS = 50;
 	for (;;)
 	{
 		while(up_time() < next_frame);
-		while ((key = readkey()) != _KEY_NONE)
+		while ((key = read_key()) != _KEY_NONE)
 		{
 			kbd_event(key);
 		}
