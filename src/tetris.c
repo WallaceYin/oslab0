@@ -178,7 +178,7 @@ int bottom_hit(_Piece *piece)
 	for (int y = piece->y; y < piece->y + piece->h; y++)
 		for (int x = piece->x; x < piece->x + piece->w; x++)
 		{
-		if (y + MIN_DIST > SCREEN_HEIGHT && *(piece->pixel + (y - piece->y) * piece->w + x - piece->x) == 0x00000000)
+		if (y + MIN_DIST >= SCREEN_HEIGHT && *(piece->pixel + (y - piece->y) * piece->w + x - piece->x) == 0x00000000)
 			continue;
 		if ((*(piece->pixel + (y - piece->y) * piece->w + x - piece->x) != 0x00000000) && (trs.bg[y + MIN_DIST][x] != 0x00000000))
 		{

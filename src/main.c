@@ -39,11 +39,14 @@ int main() {
 	time_base();
 	for (;;)
 	{
-		while(up_time() < next_frame);
+		/*while(up_time() < next_frame);
 		while ((key = read_key()) != _KEY_NONE)
 		{
 			kbd_event(key);
-		}
+		}*/
+		while (up_time() < next_frame)
+			if ((key = read_key()) != _KEY_NONE)
+				kbd_event(key);
 		game_process();
 		screen_update();
 		next_frame += 1000 / FPS;
