@@ -109,7 +109,7 @@ static void video_test(_Device *dev) {
 	for (int i = 0; i < 100; i++)
 		for (int j = 0; j < 100; j++)
 			pix[width / 2 - 50 + i][height / 2 - 50 + j] = 0x4f004a;
-	draw_rect((uint32_t *)pix, 0, 0, 640, 480);
+	draw_rect((uint32_t *)pix, 0, 0, 480, 640);
   printf("You should see a purple square on the screen.\n");
 }
 
