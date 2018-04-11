@@ -58,7 +58,7 @@ void line_eliminate(void)
 	for (;;)
 	{
 		p = &(trs.bg[SCREEN_HEIGHT - 1][0]);
-		while ((*p != 0x00000000) && (p != trs.bg[SCREEN_HEIGHT - 1][SCREEN_WIDTH - 1] + 1))
+		while ((*p != 0x00000000) && (p != &(trs.bg[SCREEN_HEIGHT - 1][SCREEN_WIDTH - 1]) + 1))
 			p++;
 		if (p != &trs.bg[SCREEN_HEIGHT - 1][SCREEN_WIDTH - 1] + 1)
 			break;
