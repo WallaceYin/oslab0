@@ -135,8 +135,19 @@ void piece_move(_Piece *piece, int direction)
 			break;
 
 		case (LEFT):
+			movable = 1;
 			if (piece->x - MIN_DIST >= 0)
-				piece->x -= MIN_DIST;
+			{
+				for (int j = 0; j < piece->h; j++)
+					for (int i = 0; i < piece->w; i++)
+					{
+						if (*(piece->pixel + j * piece->w + i) != 0x00000000 && (trs.bg[piece->y + j][piece->x - MIN_DIST + i] != 0x00000000))
+							movable = 0;
+					}
+				if (movable)
+					piece->x -= MIN_DIST;
+
+			}
 			break;
 		
 		case (RIGHT):
@@ -151,6 +162,10 @@ void piece_move(_Piece *piece, int direction)
 						if (*(piece->pixel + j * piece->w + i) == 0x00000000 && (piece->x + i + MIN_DIST > SCREEN_WIDTH))
 							continue;
 						else if (piece->x + i + MIN_DIST <= SCREEN_WIDTH)
+							continue;
+						if (*(piece->pixel + j * piece->w + i) != 0x00000000 && (trs.bg[piece->y + j][piece->x - MIN_DIST + i] != 0x00000000))
+						{}
+						else
 							continue;
 						movable = 0;
 					}
@@ -215,7 +230,7 @@ int bottom_hit(_Piece *piece)
 	for (int y = piece->y; y < piece->y + piece->h; y++)
 		for (int x = piece->x; x < piece->x + piece->w; x++)
 		{
-		if (y + MIN_DIST >= SCREEN_HEIGHT && *(piece->pixel + (y - piece->y) * piece->w + x - piece->x) == 0x00000000 && x + MIN_DIST >= SCREEN_WIDTH && *(piece->pixel + (y - piece->y) * piece->w + x - piece->x) == 0x00000000)
+		if (y + MIN_DIST >= SCREEN_HEIGHT && *(piece->pixel + (y - piece->y) * piece->w + x - piece->x) == 0x00000000)
 			continue;
 		if ((*(piece->pixel + (y - piece->y) * piece->w + x - piece->x) != 0x00000000) && (trs.bg[y + MIN_DIST][x] != 0x00000000))
 		{
