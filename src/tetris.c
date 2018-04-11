@@ -128,6 +128,7 @@ void piece_move(_Piece *piece, int direction)
 #ifdef DEBUG
 	printf("Move.\n");
 #endif
+	int movable;
 	switch (direction)
 	{
 		case (STILL):
@@ -139,13 +140,43 @@ void piece_move(_Piece *piece, int direction)
 			break;
 		
 		case (RIGHT):
+			movable = 1;
 			if (piece->x + piece->w + MIN_DIST <= SCREEN_WIDTH)
 				piece->x += MIN_DIST;
+			else
+			{
+				for (int j = 0; j < piece->h; j++)
+					for (int i = 0; i < piece->w; i++)
+					{
+						if (*(piece->pixel + j * piece->w + i) == 0x00000000 && (piece->x + i + MIN_DIST > SCREEN_WIDTH))
+							continue;
+						else if (piece->x + i + MIN_DIST <= SCREEN_WIDTH)
+							continue;
+						movable = 0;
+					}
+				if (movable)
+					piece->x += MIN_DIST;
+			}
 			break;
 
 		case (DOWN):
+			movable = 1;
 			if (piece->y + piece->h + MIN_DIST <= SCREEN_HEIGHT)
 				piece->y += MIN_DIST;
+			else
+			{
+				for (int j = 0; j < piece->h; j++)
+					for (int i = 0; i < piece->w; i++)
+					{
+						if (*(piece->pixel + j * piece->w + i) == 0x00000000 && (piece->y + j + MIN_DIST > SCREEN_HEIGHT))
+							continue;
+						else if (piece->y + j + MIN_DIST <= SCREEN_HEIGHT)
+							continue;
+						movable = 0;
+					}
+				if (movable)
+					piece->y += MIN_DIST;
+			}
 	}
 }
 
