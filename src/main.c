@@ -87,6 +87,7 @@ static void timer_test(_Device *dev) {
 			t0 = up_time();
 		printf("1s passed\n");
 		time_base();
+		t0 = up_time();
 	}
 }
 
