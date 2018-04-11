@@ -31,7 +31,7 @@ int main() {
 	//TODO: enjoy a game!!!
 	unsigned next_frame = 0;
 	int key;
-
+	game_block();
 	for (;;)
 	{
 		while(up_time() < next_frame);
@@ -62,7 +62,6 @@ static void input_test(_Device *dev) {
 }
 
 static void timer_test(_Device *dev) {
-  //_UptimeReg uptime;
   uint32_t t0, t1;
 
 	/*
