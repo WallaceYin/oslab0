@@ -81,7 +81,6 @@ void game_process(void)
 
 void screen_update(void)
 {
-	//TODO: combine Piece and background
 	draw_piece(piece);
 	for (int j = 0; j < SCREEN_HEIGHT; j++)
 		for (int i = 0; i < SCREEN_WIDTH; i++)
@@ -142,7 +141,13 @@ void piece_move(_Piece *piece, int direction)
 
 void add_bg(_Piece *piece)
 {
-	//TODO
+	int x = piece->x;
+	int y = piece->y;
+	int w = piece->w;
+	int h = piece->h;
+	for (int j = 0; j < h; j++)
+		for (int i = 0; i < w; i++)
+			trs.bg[y + j][x + i] = *(piece->pixel + j * w + i);
 }
 
 void new_piece(_Piece *piece)

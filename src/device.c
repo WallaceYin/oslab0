@@ -9,6 +9,15 @@ _device(5): ATA Disk Controller 0
 
 */
 
+static uint32_t timebase = 0;
+uint32_t time_base(void)
+{
+	_Device *dev = _device(2);
+	_UptimeReg uptime;
+	dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
+	timebase = uptime.lo;
+	return timebase;
+}
 uint32_t up_time(void)
 {
 	_Device *dev = _device(2);
@@ -16,7 +25,9 @@ uint32_t up_time(void)
 	uint32_t t0;
 	dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
 	t0 = uptime.lo;
-	return t0;
+	if (t0 < timebase)
+		return t0 + 0xffffffff - timebase;
+	return t0 - timebase;
 }
 
 int read_key(void)

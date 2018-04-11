@@ -29,9 +29,10 @@ int main() {
   }
 #else
 	//TODO: enjoy a game!!!
-	unsigned next_frame = 0;
+	unsigned next_frame = 1000 / FPS;
 	int key;
 	game_block();
+	time_base();
 	for (;;)
 	{
 		while(up_time() < next_frame);
@@ -68,6 +69,7 @@ static void timer_test(_Device *dev) {
   dev->read(_DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
   t0 = uptime.lo;
 	*/
+	time_base();
 	t0 = up_time();
 
   for (int volatile i = 0; i < 10000000; i ++) ;
