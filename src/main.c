@@ -3,13 +3,13 @@
 #include <ylib.h>
 #include <device.h>
 //#define TEST
-
+#ifdef TEST
 static void input_test(_Device *dev);
 static void timer_test(_Device *dev);
 static void video_test(_Device *dev);
 static void pciconf_test(_Device *dev);
 static void ata_test(_Device *dev);
-
+#endif
 int main() {
   if (_ioe_init() != 0) _halt(1);
 #ifdef TEST
@@ -49,6 +49,7 @@ int main() {
   return 0;
 }
 
+#ifdef TEST
 static void input_test(_Device *dev) {
   printf("Input device test skipped.\n");
 	/*int key;
@@ -183,3 +184,4 @@ static void ata_test(_Device *dev) {
     printf("\n");
   }
 }
+#endif
