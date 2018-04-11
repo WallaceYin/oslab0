@@ -1,6 +1,8 @@
 #include <tetris.h>
 #include <ylib.h>
 
+#define DEBUG
+
 _Tetris_global trs;
 _Piece *piece;
 
@@ -152,11 +154,14 @@ void add_bg(_Piece *piece)
 	int h = piece->h;
 	for (int j = 0; j < h; j++)
 		for (int i = 0; i < w; i++)
-			trs.bg[y + j][x + i] = *(piece->pixel + j * w + i);
+			if (*(piece->pixel + j * w + i) != 0x00000000) trs.bg[y + j][x + i] = *(piece->pixel + j * w + i);
 }
 
 void new_piece(_Piece *piece)
 {
+#ifdef DEBUG
+	printf("New Piece generated.\n");
+#endif
 	srand(raw_time());
 	int Rand = rand() % 40;
 	int posrand = Rand % 8;
@@ -176,7 +181,12 @@ int bottom_hit(_Piece *piece)
 		if (y + MIN_DIST > SCREEN_HEIGHT && *(piece->pixel + (y - piece->y) * piece->w + x - piece->x) == 0x00000000)
 			continue;
 		if ((*(piece->pixel + (y - piece->y) * piece->w + x - piece->x) != 0x00000000) && (trs.bg[y + MIN_DIST][x] != 0x00000000))
+		{
+#ifdef DEBUG
+				printf("Hit bottom.\n");
+#endif
 				return 1;
+		}
 		}
 	return 0;
 }
