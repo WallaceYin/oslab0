@@ -93,7 +93,7 @@ static void video_test(_Device *dev) {
 	width = screen_width();
 	height = screen_height();
   printf("Screen size: %d x %d\n", width, height);
-	uint32_t pixel = 0x006a005f;
+	//uint32_t pixel = 0x006a005f;
   /*for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++) 
 			draw_rect(&pixel, width / 2 - 50 + x, height / 2 - 50 + y, 1, 1);
@@ -106,7 +106,7 @@ static void video_test(_Device *dev) {
 	for (int i = 0; i < 640; i++)
 		for (int j = 0; j < 480; j++)
 			pix[i][j] = 0x006a005f;
-	draw_rect(pix, 0, 0, 640, 480);
+	draw_rect((uint32_t *)pix, 0, 0, 640, 480);
   printf("You should see a purple square on the screen.\n");
 }
 
