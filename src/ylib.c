@@ -291,3 +291,17 @@ int vsprintf(char *buf, const char *fmt, va_list ap)
 	}	
 	return ret; 
 }
+
+static unsigned int randnum = 1;
+void srand(unsigned int seed)
+{
+	randnum = seed;
+}
+
+#define MAXRAND 32768
+int rand(void)
+{
+	randnum = (randnum * 137422 + 417) % MAXRAND;
+	return randnum;
+}
+
