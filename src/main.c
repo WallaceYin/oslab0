@@ -32,7 +32,6 @@ int main() {
 	unsigned next_frame = 0;
 	int key;
 
-	game_init();
 	for (;;)
 	{
 		while(up_time() < next_frame);
