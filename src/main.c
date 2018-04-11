@@ -2,6 +2,7 @@
 #include <amdev.h>
 #include <ylib.h>
 #include <device.h>
+#include <tetris.h>
 //#define TEST
 #ifdef TEST
 static void input_test(_Device *dev);
@@ -33,6 +34,7 @@ int main() {
 	int key;
 	game_block();
 	time_base();
+	int FPS = 50;
 	for (;;)
 	{
 		while(up_time() < next_frame);
