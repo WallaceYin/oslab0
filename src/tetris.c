@@ -1,7 +1,7 @@
 #include <tetris.h>
 #include <ylib.h>
 
-#define DEBUG
+//#define DEBUG
 
 _Tetris_global trs;
 _Piece *piece;
