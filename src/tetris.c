@@ -324,15 +324,15 @@ void piece_rotate(_Piece *piece)
 	}
 	else if (piece->w == 3 * MIN_DIST)
 	{
-		block_copy(piece->pixel, 0, 0, MIN_DIST, 0, 3 * MIN_DIST);
-		block_copy(piece->pixel, MIN_DIST, 0, 2 * MIN_DIST, 0, 3 * MIN_DIST);
-		block_copy(piece->pixel, 2 * MIN_DIST, 0, 2 * MIN_DIST, MIN_DIST, 3 * MIN_DIST);
-		block_copy(piece->pixel, 2 * MIN_DIST, MIN_DIST, 2 * MIN_DIST, 2 * MIN_DIST, 3 * MIN_DIST);
-		block_copy(piece->pixel, 2 * MIN_DIST, 2 * MIN_DIST, MIN_DIST, 2 * MIN_DIST, 3 * MIN_DIST);
-		block_copy(piece->pixel, MIN_DIST, 2 * MIN_DIST, 0, 2 * MIN_DIST, 3 * MIN_DIST);
-		block_copy(piece->pixel, 0, 2 * MIN_DIST, 0, MIN_DIST, 3 * MIN_DIST);
-		block_copy(piece->pixel, 0, MIN_DIST, 0, 0, 3 * MIN_DIST);
-		
+		block_copy(piece->pixel, 0, 0, 2 * MIN_DIST, 0, 3 * MIN_DIST);
+		block_copy(piece->pixel, MIN_DIST, 0, 2 * MIN_DIST, MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 2 * MIN_DIST, 0, 2 * MIN_DIST, 2 * MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 2 * MIN_DIST, MIN_DIST, MIN_DIST, 2 * MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 2 * MIN_DIST, 2 * MIN_DIST, 0, 2 * MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, MIN_DIST, 2 * MIN_DIST, 0, MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 0, 2 * MIN_DIST, 0, 0, 3 * MIN_DIST);
+		block_copy(piece->pixel, 0, MIN_DIST, MIN_DIST, 0, 3 * MIN_DIST);
+		block_copy(piece->pixel, MIN_DIST, MIN_DIST, MIN_DIST, MIN_DIST, 3 * MIN_DIST);
 		for (int j = 0; j < 3 * MIN_DIST; j++)
 			for (int i = 0; i < 3 * MIN_DIST; i++)
 			{
