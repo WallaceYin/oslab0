@@ -14,6 +14,8 @@ static void video_test(_Device *dev);
 static void pciconf_test(_Device *dev);
 static void ata_test(_Device *dev);
 #endif
+
+void print_message(void);
 int main() {
   if (_ioe_init() != 0) _halt(1);
 #ifdef TEST
@@ -35,6 +37,7 @@ int main() {
 	//TODO: enjoy a game!!!
 	unsigned next_frame = 1000 / FPS;
 	int key;
+	print_message();
 	game_block();
 	time_base();
 	for (;;)
@@ -192,3 +195,19 @@ static void ata_test(_Device *dev) {
   }
 }
 #endif
+
+void print_message(void)
+{
+	printf("This is a Tetris game. Enjoy yourself!\n");
+	printf("Description:\n");
+	printf("<F2>: Game start\n");
+	printf("<F3>: Pause/Continue\n");
+	printf("<F5>: Game restart\n");
+	printf("<A>: Left move\n");
+	printf("<S>: Down move\n");
+	printf("<D>: Right move\n");
+	printf("<W>: Rotate\n");
+	printf("<A>: Left move\n");
+	printf("<>")
+}
+
