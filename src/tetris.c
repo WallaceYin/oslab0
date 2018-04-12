@@ -302,7 +302,7 @@ void piece_rotate(_Piece *piece)
 	int rotatable = 1;
 	int x = piece->x;
 	int y = piece->y;
-	memset((void *)_Temp, 0, 3 * MIN_DSIT * 3 * MIN_DIST);
+	memset((void *)_Temp, 0, 3 * MIN_DIST * 3 * MIN_DIST);
 	if (piece->w == 2 * MIN_DIST)
 	{
 		block_copy(piece->pixel, 0, 0, MIN_DIST, 0, 2 * MIN_DIST);
