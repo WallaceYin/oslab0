@@ -104,7 +104,7 @@ void screen_update(void)
 				trs.pm[j][i] = trs.bg[j][i];
 	draw_rect((uint32_t *)trs.pm, LEFT_BOND, UP_BOND, SCREEN_WIDTH, SCREEN_HEIGHT);
 	draw_rect((uint32_t *)trs.lsd, 0, 0, LEFT_BOND, SCREEN_HEIGHT);
-	draw_rect((uint32_t *)trs.rsd, LEFT_BOND + SCREEN_WIDTH, 0, 640, SCREEN_HEIGHT);
+	draw_rect((uint32_t *)trs.rsd, LEFT_BOND + SCREEN_WIDTH, 0, 160, SCREEN_HEIGHT);
 }
 
 void line_eliminate(void)
