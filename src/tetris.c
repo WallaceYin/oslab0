@@ -61,6 +61,12 @@ void game_init(void)
 {
 	memset((void *)(trs.pm), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	memset((void *)(trs.bg), 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
+	for (int j = 0; j < SCREEN_HEIGHT; j++)
+		for (int i = 0; i < LEFT_BOND; i++)
+		{
+			trs.lsd[j][i] = 0x00323232;
+			trs.rsd[j][i] = 0x00323232;
+		}
 	plist_init();
 	new_piece(piece);
 }
@@ -97,6 +103,8 @@ void screen_update(void)
 			if (trs.pm[j][i] == 0x00000000)
 				trs.pm[j][i] = trs.bg[j][i];
 	draw_rect((uint32_t *)trs.pm, LEFT_BOND, UP_BOND, SCREEN_WIDTH, SCREEN_HEIGHT);
+	draw_rect((uint32_t *)trs.lsd, 0, 0, LEFT_BOND, SCREEN_HEIGHT);
+	draw_rect((uint32_t *)trs.rsd, LEFT_BOND + SCREEN_WDITH, 0, 640, SCREEN_HEIGHT);
 }
 
 void line_eliminate(void)
