@@ -303,15 +303,14 @@ void piece_rotate(_Piece *piece)
 	int x = piece->x;
 	int y = piece->y;
 	int w = piece->w;
-	int h = piece->h;
-	if (piece->W == 2)
+	if (piece->w == 2 * MIN_DIST)
 	{
 		block_copy(piece->pixel, 0, 0, MIN_DIST, 0, 2 * MIN_DIST);
 		block_copy(piece->pixel, MIN_DIST, 0, MIN_DIST, MIN_DIST, 2 * MIN_DIST);
 		block_copy(piece->pixel, MIN_DIST, MIN_DIST, 0, MIN_DIST, 2 * MIN_DIST);
 		block_copy(piece->pixel, 0, MIN_DIST, 0, 0, 2 * MIN_DIST);
 		for (int j = 0; j < 2 * MIN_DIST; j++)
-			for (int i = 0; i < 2 * MIN_DIST, i++)
+			for (int i = 0; i < 2 * MIN_DIST; i++)
 			{
 				if (_Temp[j][i] != 0 && y + j < SCREEN_HEIGHT && x + i < SCREEN_WIDTH && trs.bg[y + j][x + i] != 0)
 					rotatable = 0;
@@ -323,7 +322,7 @@ void piece_rotate(_Piece *piece)
 				for (int i = 0; i < 2 * MIN_DIST; i++)
 					*(piece->pixel + j * 2 * MIN_DIST + i) = _Temp[j][i];
 	}
-	else if (piece->W == 3)
+	else if (piece->w == 3 * MIN_DIST)
 	{
 		block_copy(piece->pixel, 0, 0, MIN_DIST, 0, 3 * MIN_DIST);
 		block_copy(piece->pixel, MIN_DIST, 0, 2 * MIN_DIST, 0, 3 * MIN_DIST);
