@@ -67,7 +67,7 @@ void draw_rect(uint32_t *pixels, int x, int y, int w, int h)
 	fbctlreg.w = w;
 	fbctlreg.h = h;
 	fbctlreg.pixels = pixels;
-	fbctlreg.sync = 0;
+	fbctlreg.sync = 1;
 	dev->write(_DEVREG_VIDEO_FBCTL, &fbctlreg, sizeof(fbctlreg));
 }
 //WARNING: Something may be wrong here.
