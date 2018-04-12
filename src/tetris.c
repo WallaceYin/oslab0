@@ -31,7 +31,8 @@ void kbd_event(int key)
 			break;
 
 		case (_KEY_F3): //Pause
-			trs.status = 0;
+			if (trs.status) trs.status = 0;
+			else trs.status = 1;
 			break;
 
 		case (_KEY_A): //Left Move
@@ -79,6 +80,7 @@ void game_process(void)
 		if (bottom_hit(piece))
 		{
 			add_bg(piece);
+			line_eliminate();
 			new_piece(piece);
 		}
 		else
