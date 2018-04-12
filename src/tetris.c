@@ -109,7 +109,7 @@ void line_eliminate(void)
 			p++;
 		if (p != &trs.bg[SCREEN_HEIGHT - 1][SCREEN_WIDTH - 1] + 1)
 			break;
-		for (int i = SCREEN_HEIGHT - 1; i >= 0 ; i--)
+		for (int i = SCREEN_HEIGHT - 1; i > 0 ; i--)
 			for (p = &(trs.bg[i][0]); p <= &(trs.bg[i][SCREEN_WIDTH - 1]); p++)
 				*p = *(p - SCREEN_WIDTH);
 		for (p = &(trs.bg[0][0]); p <= &(trs.bg[0][SCREEN_WIDTH - 1]); p++)
