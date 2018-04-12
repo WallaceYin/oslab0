@@ -152,15 +152,14 @@ void piece_move(_Piece *piece, int direction)
 
 		case (LEFT):
 			movable = 1;
-			if (x < MIN_DIST)
-				movable = 0;
-			else
-			{
-				for (int j = 0; j < h; j++)
-					for (int i = 0; i < w; i++)
-						if (*(pixel + j * w + i) != 0 && trs.bg[y + j][x + i - MIN_DIST] != 0)
-							movable = 0;
-			}
+			for (int j = 0; j < h; j++)
+				for (int i = 0; i < w; i++)
+				{
+					if (*(pixel + j * w + i) != 0 && trs.bg[y + j][x + i - MIN_DIST] != 0 && x + i - MIN_DIST >= 0)
+						movable = 0;
+					else if (x + i - MIN_DIST < 0 && *(pixel + j * w + i) != 0)
+						movable = 0;
+				}
 			if (movable)
 				piece->x -= MIN_DIST;
 			break;
