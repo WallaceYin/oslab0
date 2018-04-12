@@ -207,7 +207,5 @@ void print_message(void)
 	printf("<S>: Down move\n");
 	printf("<D>: Right move\n");
 	printf("<W>: Rotate\n");
-	printf("<A>: Left move\n");
-	printf("<>")
 }
 
