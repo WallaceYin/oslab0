@@ -45,7 +45,8 @@ void kbd_event(int key)
 			break;
 
 		case (_KEY_W): //Rotate
-			//TODO
+			if (trs.status)
+				piece_rotate(piece);
 			break;
 
 		case (_KEY_S): //Down Move
@@ -210,6 +211,8 @@ void new_piece(_Piece *piece)
 	piece->y = 0;
 	piece->w = pl[typerand].W * MIN_DIST;
 	piece->h = pl[typerand].H * MIN_DIST;
+	if (piece->x + piece->w >= SCREEN_WIDTH)
+		piece->x = SCREEN_WIDTH - MIN_DIST - piece->w;
 	piece->pixel = pl[typerand].pixel;
 }
 
@@ -285,3 +288,64 @@ void plist_init(void)
 	pl[4].W = 3; pl[4].H = 3; pl[4].pixel = (uint32_t *)_pl_4;
 
 }
+
+uint32_t _Temp[MIN_DIST * 3][MIN_DIST * 3];
+void piece_rotate(_Piece *piece)
+{
+	void block_copy(uint32_t *pixel, int x1, int y1, int x2, int y2, int width)
+	{
+		for (int j = 0; j < MIN_DIST; j++)
+			for (int i = 0; i < MIN_DIST; i++)
+				_Temp[j + y2][i + x2] = *(pixel + (y1 + j) * width + (x1 + i));
+	};
+	//Copy (x1, y1, x1 + MIN_DIST, y1 + MIN_DIST) in pixel to (x2, y2, x2 + MIN_DIST, y2 + MIN_DIST)
+	int rotatable = 1;
+	int x = piece->x;
+	int y = piece->y;
+	int w = piece->w;
+	int h = piece->h;
+	if (piece->W == 2)
+	{
+		block_copy(piece->pixel, 0, 0, MIN_DIST, 0, 2 * MIN_DIST);
+		block_copy(piece->pixel, MIN_DIST, 0, MIN_DIST, MIN_DIST, 2 * MIN_DIST);
+		block_copy(piece->pixel, MIN_DIST, MIN_DIST, 0, MIN_DIST, 2 * MIN_DIST);
+		block_copy(piece->pixel, 0, MIN_DIST, 0, 0, 2 * MIN_DIST);
+		for (int j = 0; j < 2 * MIN_DIST; j++)
+			for (int i = 0; i < 2 * MIN_DIST, i++)
+			{
+				if (_Temp[j][i] != 0 && y + j < SCREEN_HEIGHT && x + i < SCREEN_WIDTH && trs.bg[y + j][x + i] != 0)
+					rotatable = 0;
+			else if (_Temp[j][i] != 0 && !(y + j < SCREEN_HEIGHT && x + i < SCREEN_WIDTH))
+				rotatable = 0;
+			}
+		if (rotatable)
+			for (int j = 0; j < 2 * MIN_DIST; j++)
+				for (int i = 0; i < 2 * MIN_DIST; i++)
+					*(piece->pixel + j * 2 * MIN_DIST + i) = _Temp[j][i];
+	}
+	else if (piece->W == 3)
+	{
+		block_copy(piece->pixel, 0, 0, MIN_DIST, 0, 3 * MIN_DIST);
+		block_copy(piece->pixel, MIN_DIST, 0, 2 * MIN_DIST, 0, 3 * MIN_DIST);
+		block_copy(piece->pixel, 2 * MIN_DIST, 0, 2 * MIN_DIST, MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 2 * MIN_DIST, MIN_DIST, 2 * MIN_DIST, 2 * MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 2 * MIN_DIST, 2 * MIN_DIST, MIN_DIST, 2 * MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, MIN_DIST, 2 * MIN_DIST, 0, 2 * MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 0, 2 * MIN_DIST, 0, MIN_DIST, 3 * MIN_DIST);
+		block_copy(piece->pixel, 0, MIN_DIST, 0, 0, 3 * MIN_DIST);
+		
+		for (int j = 0; j < 3 * MIN_DIST; j++)
+			for (int i = 0; i < 3 * MIN_DIST; i++)
+			{
+				if (_Temp[j][i] != 0 && y + j < SCREEN_HEIGHT && x + i < SCREEN_WIDTH && trs.bg[y + j][x + i] != 0)
+					rotatable = 0;
+				else if (_Temp[j][i] != 0 && !(y + j < SCREEN_HEIGHT && x + i < SCREEN_WIDTH))
+					rotatable = 0;
+			}
+		if (rotatable)
+			for (int j  = 0; j < 3 * MIN_DIST; j++)
+				for (int i = 0; i < 3 * MIN_DIST; i++)
+					*(piece->pixel + j * 3 * MIN_DIST + i) = _Temp[j][i];
+	}
+}
+
