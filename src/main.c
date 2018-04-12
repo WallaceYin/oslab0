@@ -207,5 +207,6 @@ void print_message(void)
 	printf("<S>: Down move\n");
 	printf("<D>: Right move\n");
 	printf("<W>: Rotate\n");
+	printf("WARNING: Please run this in 640 * 480 size.\n");
 }
 
