@@ -34,7 +34,6 @@ int main() {
     printf("\n");
   }
 #else
-	//TODO: enjoy a game!!!
 	unsigned next_frame = 1000 / FPS;
 	int key;
 	print_message();
