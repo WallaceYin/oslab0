@@ -20,7 +20,7 @@ int main() {
   if (_ioe_init() != 0) _halt(1);
 #ifdef TEST
   printf("_heap = [%08x, %08x)\n", _heap.start, _heap.end);
-	int *p = _head.start;
+	int *p = _heap.start;
 	printf("duiqui: %d\n", *p);
   for (int n = 1; ; n++) {
     _Device *dev = _device(n);
