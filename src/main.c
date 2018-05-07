@@ -81,7 +81,7 @@ static void timer_test(_Device *dev) {
 	*/
 	time_base();
 	t0 = up_time();
-
+	return; 
   //for (int volatile i = 0; i < 10000000; i ++) ;
 
 	/*
