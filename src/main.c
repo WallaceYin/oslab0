@@ -5,7 +5,7 @@
 #include <tetris.h>
 #define FPS 20
 
-//#define TEST
+#define TEST
 
 #ifdef TEST
 static void input_test(_Device *dev);
